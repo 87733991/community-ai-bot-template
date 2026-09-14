@@ -1,0 +1,28 @@
+{
+  "name": "community-ai-bot-template",
+  "version": "1.0.0",
+  "description": "1-Click Self-Hosted Discord & Telegram Community AI Assistant powered by B-Lost Gateway",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "register-commands": "node scripts/register_slash_commands.js"
+  },
+  "keywords": [
+    "discord-bot",
+    "telegram-bot",
+    "ai-assistant",
+    "gemini",
+    "claude",
+    "b-lost-gateway",
+    "vercel-serverless",
+    "1-click-deploy"
+  ],
+  "author": "B-Lost Developer Community",
+  "license": "MIT",
+  "dependencies": {
+    "discord-interactions": "^4.1.0",
+    "dotenv": "^16.4.5"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/discord", "destination": "/api/discord.js" },
+    { "source": "/api/telegram", "destination": "/api/telegram.js" },
+    { "source": "/", "destination": "/api/index.js" }
+  ]
+}
