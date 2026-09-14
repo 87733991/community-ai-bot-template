@@ -5,6 +5,13 @@
 
 import { askGateway } from "./gateway.js";
 
+function getFooter() {
+  const enableFooter = (process.env.ENABLE_FOOTER ?? "true").toLowerCase() !== "false";
+  if (!enableFooter) return "";
+  const customFooter = process.env.CUSTOM_FOOTER || "⚡ Powered by [B-Lost Gateway](https://b-lost.com)";
+  return `\n\n────────────────────\n${customFooter}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed. Use POST." });
@@ -25,13 +32,13 @@ export default async function handler(req, res) {
   const chatId = message.chat.id;
   const userText = message.text.trim();
   const userName = message.from?.first_name || message.from?.username || "Friend";
+  const botName = process.env.BOT_NAME || "Community AI Assistant";
 
-  // Ignore /start command with welcome greeting
+  // Handle /start or /help command with welcome greeting
   if (userText.startsWith("/start") || userText.startsWith("/help")) {
     const welcome = 
-      `👋 *Hello ${userName}!* I'm your community AI assistant.\n\n` +
-      `Send me any coding question or debug error, and I'll generate clean, production-ready solutions!\n\n` +
-      `⚡ *Powered by [B-Lost Gateway](https://b-lost.com)*`;
+      `👋 *Hello ${userName}!* I'm ${botName}.\n\n` +
+      `Send me any question or debug query, and I'll generate clean solutions!${getFooter()}`;
 
     await sendTelegramMessage(tgToken, chatId, welcome);
     return res.status(200).send("OK");
@@ -39,11 +46,7 @@ export default async function handler(req, res) {
 
   // Generate answer
   const result = await askGateway({ prompt: userText, userName });
-  const reply = 
-    `${result.text}\n\n` +
-    `────────────────────\n` +
-    `💡 *如有需要我也能為你解答我們的業務*\n` +
-    `🎁 *註冊即送 $10，每日消費前 10 名再送 $10：[b-lost.com](https://b-lost.com)*`;
+  const reply = `${result.text}${getFooter()}`;
 
   await sendTelegramMessage(tgToken, chatId, reply);
   return res.status(200).send("OK");

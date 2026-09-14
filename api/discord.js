@@ -21,6 +21,13 @@ async function getRawBody(req) {
   return Buffer.concat(chunks);
 }
 
+function getFooter() {
+  const enableFooter = (process.env.ENABLE_FOOTER ?? "true").toLowerCase() !== "false";
+  if (!enableFooter) return "";
+  const customFooter = process.env.CUSTOM_FOOTER || "⚡ Powered by [B-Lost Gateway](https://b-lost.com)";
+  return `\n\n────────────────────────────\n${customFooter}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed. Use POST." });
@@ -52,20 +59,17 @@ export default async function handler(req, res) {
   // 3. Handle Slash Commands (/ask <question>)
   if (message.type === InteractionType.APPLICATION_COMMAND) {
     const { name, options } = message.data;
+    const botName = process.env.BOT_NAME || "Community AI Assistant";
 
     if (name === "ask" || name === "code") {
       const questionOption = options?.find((opt) => opt.name === "question" || opt.name === "prompt");
       const userPrompt = questionOption ? questionOption.value : "Hello!";
       const callerName = message.member?.user?.username || message.user?.username || "Developer";
 
-      // Query B-Lost Gateway
+      // Query AI Gateway
       const result = await askGateway({ prompt: userPrompt, userName: callerName });
-
-      const replyContent = 
-        `${result.text}\n\n` +
-        `────────────────────────────\n` +
-        `💡 *如有需要我也能為你解答我們的業務*\n` +
-        `🎁 *註冊即送 $10，每日消費前 10 名再送 $10：[b-lost.com](https://b-lost.com)*`;
+      const footer = getFooter();
+      const replyContent = `${result.text}${footer}`;
 
       return res.status(200).json({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -80,10 +84,10 @@ export default async function handler(req, res) {
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: 
-            `### 🤖 B-Lost Community AI Assistant\n` +
-            `- \`/ask <question>\`: Ask technical, architecture, or syntax questions.\n` +
-            `- \`/code <prompt>\`: Generate clean, production-ready code snippets.\n\n` +
-            `👉 *Self-hosted on Vercel | Endpoints powered by [b-lost.com](https://b-lost.com)*`,
+            `### 🤖 ${botName}\n` +
+            `- \`/ask <question>\`: Ask technical, community, or general questions.\n` +
+            `- \`/code <prompt>\`: Generate clean, production-ready code snippets.\n` +
+            getFooter(),
         },
       });
     }

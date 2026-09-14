@@ -4,12 +4,13 @@
  */
 
 export default function handler(req, res) {
+  const botName = process.env.BOT_NAME || "Community AI Assistant";
   const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>B-Lost Community AI Bot - Serverless Gateway</title>
+  <title>${botName} - Serverless Gateway</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f1f5f9; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
     .card { background: #1e293b; border: 1px solid #334155; padding: 36px; border-radius: 12px; max-width: 480px; text-align: center; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
@@ -23,11 +24,11 @@ export default function handler(req, res) {
 <body>
   <div class="card">
     <div class="status">🟢 SERVERLESS ENDPOINTS ACTIVE</div>
-    <h1>B-Lost Community AI Assistant</h1>
-    <p>Your self-hosted Discord & Telegram AI assistant is deployed and running smoothly on Vercel Serverless.</p>
+    <h1>${botName}</h1>
+    <p>Your self-hosted Discord & Telegram AI assistant is deployed and running smoothly on Serverless.</p>
     <div class="links">
-      <a href="https://b-lost.com" target="_blank">Get B-Lost API Key</a>
-      <a href="https://github.com" class="outline" target="_blank">View GitHub Repo</a>
+      <a href="https://b-lost.com" target="_blank">Get AI API Key</a>
+      <a href="https://github.com/87733991/community-ai-bot-template" class="outline" target="_blank">GitHub Repo</a>
     </div>
   </div>
 </body>
