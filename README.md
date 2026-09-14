@@ -3,7 +3,7 @@
 # 🤖 Community AI Assistant (Discord & Telegram)
 ### 1-Click Serverless Community Bot Powered by [B-Lost Gateway](https://b-lost.com)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/b-lost/community-ai-bot-template&env=BLOST_API_KEY,DISCORD_PUBLIC_KEY,DISCORD_BOT_TOKEN&envDescription=Get%20your%20free%20B-Lost%20API%20Key%20at%20https://b-lost.com&project-name=my-community-ai-bot&repository-name=my-community-ai-bot)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/87733991/community-ai-bot-template&env=BLOST_API_KEY,DISCORD_PUBLIC_KEY,DISCORD_BOT_TOKEN&envDescription=Get%20your%20free%20B-Lost%20API%20Key%20at%20https://b-lost.com&project-name=my-community-ai-bot&repository-name=my-community-ai-bot)
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Gateway: B-Lost](https://img.shields.io/badge/Gateway-B--Lost%20Relay-emerald)](https://b-lost.com)
