@@ -33,7 +33,7 @@ function buildSystemPrompt() {
 export async function askGateway({ prompt, userName = "Community Member" }) {
   const baseUrl = (process.env.BLOST_BASE_URL || process.env.OPENAI_BASE_URL || "https://b-lost.com/v1").replace(/\/+$/, "");
   const apiKey = (process.env.BLOST_API_KEY || process.env.OPENAI_API_KEY || "").trim();
-  const model = process.env.DEFAULT_MODEL || "gemini-3.8-flash";
+  const model = process.env.DEFAULT_MODEL || "gemini-2.5-flash-lite";
   const maxTokens = parseInt(process.env.MAX_TOKENS || "800", 10);
   const temperature = parseFloat(process.env.TEMPERATURE || "0.3");
 
